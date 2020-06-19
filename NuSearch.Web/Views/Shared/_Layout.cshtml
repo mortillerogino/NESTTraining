@@ -1,0 +1,29 @@
+﻿@model SearchViewModel
+<!doctype html>
+<html>
+<head>
+	<title>NuSearch</title>
+	<link rel="stylesheet" href="~/css/nusearch.min.css" asp-append-version="true" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<nav class="navbar navbar-default header-site">
+		<div class="container-fluid bound-container ">
+			<h1>nuget package search</h1>
+			@using (Html.BeginForm("Index", "Search", FormMethod.Get))
+			{
+				@await Html.PartialAsync("RememberForm", Model.Form)
+				@await Html.PartialAsync("QueryBox", Model.Form)
+			}
+		</div>
+	</nav>
+	<nav class="navbar header-site-sub">
+		<div class="container-fluid bound-container ">
+			@await RenderSectionAsync("HeaderSub", required: false)
+		</div>
+	</nav>
+	@RenderBody()
+	<script src="~/js/nusearch.min.js" asp-append-version="true"></script>
+
+</body>
+</html>
