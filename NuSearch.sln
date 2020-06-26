@@ -9,6 +9,25 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NuSearch.Domain", "NuSearch
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NuSearch.Indexer", "NuSearch.Indexer\NuSearch.Indexer.csproj", "{82943C55-559F-4EF8-B953-61301DB2D03A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{A77618E3-C762-4543-85C1-ED96E5B4B2BC}"
+	ProjectSection(SolutionItems) = preProject
+		..\docker-new\docker-compose.yml = ..\docker-new\docker-compose.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{98D0CB9B-E477-4682-B2E6-45A652CCE1B2}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{652E349F-E8D7-4B76-8921-5DBA859C4440}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\Users\Gamer\Pictures\docker\cluster-health.png = ..\..\Users\Gamer\Pictures\docker\cluster-health.png
+		..\..\Users\Gamer\Pictures\docker\import-success.png = ..\..\Users\Gamer\Pictures\docker\import-success.png
+		..\..\Users\Gamer\Pictures\docker\kibana-loading.png = ..\..\Users\Gamer\Pictures\docker\kibana-loading.png
+		..\..\Users\Gamer\Pictures\docker\set-ram-to-4gb.png = ..\..\Users\Gamer\Pictures\docker\set-ram-to-4gb.png
+		..\..\Users\Gamer\Pictures\docker\total-count.png = ..\..\Users\Gamer\Pictures\docker\total-count.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
