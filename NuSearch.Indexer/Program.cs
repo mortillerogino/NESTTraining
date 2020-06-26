@@ -16,8 +16,6 @@ namespace NuSearch.Indexer
 		private static ElasticClient Client { get; set; }
 		private static NugetDumpReader DumpReader { get; set; }
 
-		private static string CurrentIndexName { get; set; }
-
 		static void Main(string[] args)
 		{
 			Client = NuSearchConfiguration.GetClient();
@@ -25,11 +23,10 @@ namespace NuSearch.Indexer
 				? args[0]
 				: NuSearchConfiguration.PackagePath;
 			DumpReader = new NugetDumpReader(directory);
-			CurrentIndexName = NuSearchConfiguration.CreateIndexName();
 
+			DeleteIndexIfExists();
 			CreateIndex();
 			IndexDumps();
-			SwapAlias();
 
 			Console.WriteLine("Press Enter to continue");
 			Console.Read();
@@ -44,28 +41,43 @@ namespace NuSearch.Indexer
 			var waitHandle = new CountdownEvent(1);
 
 			var sw = Stopwatch.StartNew();
+
 			var bulkAll = Client.BulkAll(packages, b => b
-							.Index(CurrentIndexName)
-							.BackOffRetries(2)
-							.BackOffTime("60s")
-							.RefreshOnCompleted(true)
-							.MaxDegreeOfParallelism(4)
-							.Size(1000)
-						);
+						.BackOffRetries(2)
+						.BackOffTime("30s")
+						.RefreshOnCompleted(true)
+						.MaxDegreeOfParallelism(4)
+						.Size(1000)
+					);
+
+			ExceptionDispatchInfo captureInfo = null;
 
 			bulkAll.Subscribe(new BulkAllObserver(
 				onNext: b => Console.Write("."),
+				onError: e =>
+				{
+					captureInfo = ExceptionDispatchInfo.Capture(e);
+					waitHandle.Signal();
+				},
 				onCompleted: () => waitHandle.Signal()
 			));
 
 			waitHandle.Wait();
+			captureInfo?.Throw();
 			sw.Stop();
 			Console.WriteLine($"Done. Elapsed {sw.ElapsedMilliseconds}");
+
+		}
+
+		static void DeleteIndexIfExists()
+		{
+			if (Client.Indices.Exists(new IndexExistsRequest("nusearch")).Exists)
+				Client.Indices.Delete("nusearch");
 		}
 
 		static void CreateIndex()
 		{
-			Client.Indices.Create(CurrentIndexName, i => i
+			Client.Indices.Create("nusearch", i => i
 				.Settings(s => s
 					.NumberOfShards(2)
 					.NumberOfReplicas(0)
@@ -99,30 +111,30 @@ namespace NuSearch.Indexer
 			);
 		}
 
-		private static void SwapAlias()
-		{
-			var indexExists = Client.Indices.Exists(NuSearchConfiguration.LiveIndexAlias).Exists;
+		//private static void SwapAlias()
+		//{
+		//	var indexExists = Client.Indices.Exists(NuSearchConfiguration.LiveIndexAlias).Exists;
 
-			Client.Indices.BulkAlias(aliases =>
-			{
-				if (indexExists)
-					aliases.Add(a => a
-						.Alias(NuSearchConfiguration.OldIndexAlias)
-						.Index(Client.GetIndicesPointingToAlias(NuSearchConfiguration.LiveIndexAlias).First())
-					);
+		//	Client.Indices.BulkAlias(aliases =>
+		//	{
+		//		if (indexExists)
+		//			aliases.Add(a => a
+		//				.Alias(NuSearchConfiguration.OldIndexAlias)
+		//				.Index(Client.GetIndicesPointingToAlias(NuSearchConfiguration.LiveIndexAlias).First())
+		//			);
 
-				return aliases
-					.Remove(a => a.Alias(NuSearchConfiguration.LiveIndexAlias).Index("*"))
-					.Add(a => a.Alias(NuSearchConfiguration.LiveIndexAlias).Index(CurrentIndexName));
-			});
+		//		return aliases
+		//			.Remove(a => a.Alias(NuSearchConfiguration.LiveIndexAlias).Index("*"))
+		//			.Add(a => a.Alias(NuSearchConfiguration.LiveIndexAlias).Index(CurrentIndexName));
+		//	});
 
-			var oldIndices = Client.GetIndicesPointingToAlias(NuSearchConfiguration.OldIndexAlias)
-				.OrderByDescending(name => name)
-				.Skip(2);
+		//	var oldIndices = Client.GetIndicesPointingToAlias(NuSearchConfiguration.OldIndexAlias)
+		//		.OrderByDescending(name => name)
+		//		.Skip(2);
 
-			foreach (var oldIndex in oldIndices)
-				Client.Indices.Delete(oldIndex);
-		}
+		//	foreach (var oldIndex in oldIndices)
+		//		Client.Indices.Delete(oldIndex);
+		//}
 	}
 }
  
