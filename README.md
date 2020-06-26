@@ -3,20 +3,22 @@
 The initial goal with this project was to compare the 2 Elastic Search Libraries in .NET to determine advantages in use. Using Nuget data and Elastic Search engine, we made our own search page. This uses the basic version of Elastic Search, 7.8.
 
 **About Nest**
+
 NEST is a high level .NET Elastic Search Client that provides strongly typed one-to-one mapping .Net queries to Elastic Search queries. Due to that conversion, we expect an overhead which lead us to benchmark if it's a good compromise for more features and capabilities.
 
 **Tested in:**
-Windows 10
-Visual Studio 2019
+- Windows 10
+- Visual Studio 2019
 
 **Requirements:**
-[Docker Desktop for Windows](https://docs.docker.com/get-docker/)
-[Nuget Data](https://nusearch.blob.core.windows.net/dump/nuget-data-jul-2017.zip)
-4GB RAM
+
+- [Docker Desktop for Windows](https://docs.docker.com/get-docker/)
+- [Nuget Data](https://nusearch.blob.core.windows.net/dump/nuget-data-jul-2017.zip)
+- 4GB RAM
 
 ## I. Installation
 
-**I.a. Docker Installation**
+**I.A. DOCKER INSTALLATION**
 
 Install Docker, open it, and go to settings. Go to Resource and set memory to about 4GB Ram.
 
@@ -43,7 +45,7 @@ This is critical because we will be indexing a big number of documents.
 
 
 
-**I.b. Running the indexer.**
+**I.B. RUNNING THE INDEXER**
 
 Extract the data on the same folder as the solution (not inside).
 
