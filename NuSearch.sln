@@ -24,6 +24,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{9C2136
 		Images\cluster-health.png = Images\cluster-health.png
 		Images\import-success.png = Images\import-success.png
 		Images\kibana-loading.png = Images\kibana-loading.png
+		Images\results-with-query-score.png = Images\results-with-query-score.png
+		Images\search-page.png = Images\search-page.png
 		Images\set-ram-to-4gb.png = Images\set-ram-to-4gb.png
 		Images\total-count.png = Images\total-count.png
 	EndProjectSection
