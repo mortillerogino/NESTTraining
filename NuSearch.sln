@@ -9,14 +9,23 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NuSearch.Domain", "NuSearch
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NuSearch.Indexer", "NuSearch.Indexer\NuSearch.Indexer.csproj", "{82943C55-559F-4EF8-B953-61301DB2D03A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{A77618E3-C762-4543-85C1-ED96E5B4B2BC}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{98D0CB9B-E477-4682-B2E6-45A652CCE1B2}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{216AF756-6351-453C-A6FA-E7BE1196E73C}"
 	ProjectSection(SolutionItems) = preProject
 		..\docker-new\docker-compose.yml = ..\docker-new\docker-compose.yml
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{98D0CB9B-E477-4682-B2E6-45A652CCE1B2}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{9C21369F-CA3E-45DF-939C-45CA1278F4FF}"
 	ProjectSection(SolutionItems) = preProject
-		README.md = README.md
+		Images\cluster-health.png = Images\cluster-health.png
+		Images\import-success.png = Images\import-success.png
+		Images\kibana-loading.png = Images\kibana-loading.png
+		Images\set-ram-to-4gb.png = Images\set-ram-to-4gb.png
+		Images\total-count.png = Images\total-count.png
 	EndProjectSection
 EndProject
 Global
@@ -40,6 +49,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{216AF756-6351-453C-A6FA-E7BE1196E73C} = {98D0CB9B-E477-4682-B2E6-45A652CCE1B2}
+		{9C21369F-CA3E-45DF-939C-45CA1278F4FF} = {98D0CB9B-E477-4682-B2E6-45A652CCE1B2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A8DEBF20-6A02-42D8-9AA5-045FE0A2440A}
