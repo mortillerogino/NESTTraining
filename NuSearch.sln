@@ -19,15 +19,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{652E349F-E8D7-4B76-8921-5DBA859C4440}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\Users\Gamer\Pictures\docker\cluster-health.png = ..\..\Users\Gamer\Pictures\docker\cluster-health.png
-		..\..\Users\Gamer\Pictures\docker\import-success.png = ..\..\Users\Gamer\Pictures\docker\import-success.png
-		..\..\Users\Gamer\Pictures\docker\kibana-loading.png = ..\..\Users\Gamer\Pictures\docker\kibana-loading.png
-		..\..\Users\Gamer\Pictures\docker\set-ram-to-4gb.png = ..\..\Users\Gamer\Pictures\docker\set-ram-to-4gb.png
-		..\..\Users\Gamer\Pictures\docker\total-count.png = ..\..\Users\Gamer\Pictures\docker\total-count.png
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
