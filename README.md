@@ -24,11 +24,41 @@ Install Docker, open it, and go to settings. Go to Resource and set memory to ab
 
 ![image: set-ram-to-4gb.png](Images/set-ram-to-4gb.png)
 
-To install, run in powershell/git bash the following on the docker folder containing the docker-compose.yml file.
+As our Elastic Search includes authentication, you'll need to install some certificates. On the docker folder directory, open powershell/git bash and run the following code:
+
+    docker-compose -f create-certs.yml run --rm create_certs
+
+After you press enter, it should show you the following:
+
+![image: cert-installed.png](Images/cert-installed.png)
+
+Still in powershell/git bash, run the following to start the elastic stack instances.
 
     docker-compose up
 
-This should setup 3 nodes for your elastic search and also Kibana, which would be accessible through http://localhost:5601.
+This should setup 3 nodes for your elastic search and also Kibana, which at the moment won't be able to connect yet. But we'll fix that as we move forward with more steps.
+
+As part of the authentication process, you'll need to generate your own passwords. Run the following command on powershell/git bash:
+
+    docker exec es01 /bin/bash -c "bin/elasticsearch-setup-passwords auto --batch --url https://es01:9200"
+
+This runs a batch file that will generate passwords for your use, like the following:
+
+![image: password_creation.png](Images/password_creation.png)
+
+Take note of your passwords, this is very important. Once you have the passwords, get the kibana_user password and open the docker-compose.yml file. Look for ELASTICSEARCH_PASSWORD and update the value there to your personal password. 
+
+To update your changes, save the file. Then on back to the powershell/git bash, run the following command:
+
+    docker-compose stop
+
+Then the following:
+
+    docker-compose up
+    
+This restarts your docker instances and applies your changes. Once everything is started, you can go to Kibana through https://localhost:5601.
+
+The login credentials can be found from the generated passwords still, the elastic username and its corresponding password.
 
 ![image: kibana-loading.png](Images/kibana-loading.png)
 
@@ -42,14 +72,13 @@ You should get the following information confirming you have indeed 3 nodes.
 
 This is critical because we will be indexing a big number of documents.
 
-
-
-
 **I.B. RUNNING THE INDEXER**
 
 Extract the data on the same folder as the solution (not inside).
 
-Open the solution and set the NuSearch.Indexer as the Startup Project. Build and run and you should be able to confirm success by seeing something similar below.
+Open the solution and set the username and password on NuSearchConfiguration.cs. This will be the elastic login details. Once updated, save and set NuSearch.Indexer as the Startup Project. 
+
+Build and run and you should be able to confirm success by seeing something similar below.
 
 ![image: import-success.png](Images/import-success.png)
 
