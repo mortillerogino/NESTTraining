@@ -16,7 +16,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{216AF756-6351-453C-A6FA-E7BE1196E73C}"
 	ProjectSection(SolutionItems) = preProject
-		..\docker-new\docker-compose.yml = ..\docker-new\docker-compose.yml
+		Docker\.env = Docker\.env
+		Docker\create-certs.yml = Docker\create-certs.yml
+		Docker\docker-compose.yml = Docker\docker-compose.yml
+		Docker\instances.yml = Docker\instances.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{9C21369F-CA3E-45DF-939C-45CA1278F4FF}"
