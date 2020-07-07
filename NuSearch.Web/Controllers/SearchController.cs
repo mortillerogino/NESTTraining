@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Nest;
+using NuSearch.Domain.ConfigServer;
 using NuSearch.Domain.Model;
 using NuSearch.Web.Models;
 
@@ -11,7 +13,11 @@ namespace NuSearch.Web.Controllers
     {
 		private readonly IElasticClient _client;
 
-		public SearchController(IElasticClient client) => _client = client;
+		public SearchController(IElasticClient client, IOptionsSnapshot<ConfigServerData> configServerData)
+		{
+			// Debug here to check configServerData
+			_client = client;
+		}
 
 	    [HttpGet]
         public IActionResult Index(SearchForm form)
