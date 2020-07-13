@@ -46,7 +46,11 @@ This runs a batch file that will generate passwords for your use, like the follo
 
 ![image: password_creation.png](Images/password_creation.png)
 
-Take note of your passwords, this is very important. Once you have the passwords, get the kibana_user password and open the docker-compose.yml file. Look for ELASTICSEARCH_PASSWORD and update the value there to your personal password. 
+Take note of your passwords, this is very important. To be specific, what you need are the **kibana_system and the elastic password** for this tutorial.
+
+Once you have the passwords, get the kibana_user password and open the docker folder and the **.env file**. Look for **KIBANASYS_PASS** and update the value there to your **kibana_system password** from the generated passwords. 
+
+***IMPORTANT!*** The .env file can also be used to change ports in the event that you are already using the default ports of 9200 and 5601. Just change the values after the = for the ELASTIC_PORT and KIBANA_PORT.
 
 To update your changes, save the file. Then on back to the powershell/git bash, run the following command:
 
@@ -56,9 +60,9 @@ Then the following:
 
     docker-compose up
     
-This restarts your docker instances and applies your changes. Once everything is started, you can go to Kibana through https://localhost:5601.
+This restarts your docker instances and applies your changes. Once everything is started, you can go to Kibana through https://localhost:{your current Kibana port on the .env file}. By default, this is 5601.
 
-The login credentials can be found from the generated passwords still, the elastic username and its corresponding password.
+The login credentials can be found from the generated passwords still, the **elastic username and its corresponding password.**
 
 ![image: kibana-loading.png](Images/kibana-loading.png)
 
@@ -76,7 +80,7 @@ This is critical because we will be indexing a big number of documents.
 
 Extract the data on the same folder as the solution (not inside).
 
-Open the solution and set the username and password on NuSearchConfiguration.cs. This will be the elastic login details. Once updated, save and set NuSearch.Indexer as the Startup Project. 
+Open the solution and on NuSearch.Domain Module, go to appsettings.json. Here, set the password for user elastic from the generated passwords earlier. Also, if you changed the ports, update this to the same as the ELASTIC_PORT set in the .env file. Once updated, save and set NuSearch.Indexer as the Startup Project. 
 
 Build and run and you should be able to confirm success by seeing something similar below.
 
