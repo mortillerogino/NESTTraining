@@ -14,18 +14,22 @@ namespace NuSearch.Domain
 
 		static NuSearchConfiguration()
 		{
-			_connectionSettings = new ConnectionSettings(CreateUri(9200))
-				.BasicAuthentication(Username, Password)
+			var config = AppSettings.Configuration;
+			var tea = config["Port"];
+
+			if (!int.TryParse(config["Port"], out int port))
+			{
+				throw new Exception("Invalid Port on AppSettings");
+			}
+
+			_connectionSettings = new ConnectionSettings(CreateUri(port))
+				.BasicAuthentication(config["Username"], config["Password"])
 				.ServerCertificateValidationCallback(CertificateValidations.AllowAll)
 				.DefaultMappingFor<Package>(i => i.IndexName("nusearch"))
 				.PrettyJson();
 		}
 
 		private static readonly ConnectionSettings _connectionSettings;
-
-		private static string Username => "elastic";
-
-		private static string Password => "0pnSrgLtK9LLiH2NKAFM";
 
 		public static string LiveIndexAlias => "nusearch";
 
@@ -40,5 +44,6 @@ namespace NuSearch.Domain
 
 		public static string PackagePath => 
 			RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? @"C:\Work\data\nuget-data" : "/nuget-data";
+
 	}
 }

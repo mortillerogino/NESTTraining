@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Steeltoe.Extensions.Configuration.ConfigServer;
 
 namespace NuSearch.Web
 {
@@ -11,7 +10,6 @@ namespace NuSearch.Web
         public static void Main(string[] args)
         {
             var host = Host.CreateDefaultBuilder(args)
-				.AddConfigServer()
 	            .ConfigureWebHostDefaults(webBuilder =>
 	            {
 		            webBuilder.UseSetting("detailedErrors", "true")

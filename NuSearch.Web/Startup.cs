@@ -8,8 +8,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
 using Nest;
 using NuSearch.Domain;
-using NuSearch.Domain.ConfigServer;
-using Steeltoe.Extensions.Configuration.ConfigServer;
 
 namespace NuSearch.Web
 {
@@ -30,11 +28,9 @@ namespace NuSearch.Web
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddOptions();
-			services.ConfigureConfigServerClientOptions(Configuration);
 
 			services.AddControllersWithViews();
 
-			services.Configure<ConfigServerData>(Configuration);
 			services.AddSingleton<IElasticClient>(NuSearchConfiguration.GetClient());
 		}
 
