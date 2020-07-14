@@ -12,6 +12,8 @@ namespace NuSearch.Domain
 	{
 		public static ElasticClient GetClient() => new ElasticClient(_connectionSettings);
 
+		public static ElasticLowLevelClient GetLowLevelClient() => new ElasticLowLevelClient(_connectionSettings);
+
 		static NuSearchConfiguration()
 		{
 			var config = AppSettings.Configuration;
@@ -22,7 +24,9 @@ namespace NuSearch.Domain
 				throw new Exception("Invalid Port on AppSettings");
 			}
 
-			_connectionSettings = new ConnectionSettings(CreateUri(port))
+			Uri elasticUri = CreateUri(port);
+
+			_connectionSettings = new ConnectionSettings(elasticUri)
 				.BasicAuthentication(config["Username"], config["Password"])
 				.ServerCertificateValidationCallback(CertificateValidations.AllowAll)
 				.DefaultMappingFor<Package>(i => i.IndexName("nusearch"))
