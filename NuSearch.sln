@@ -37,7 +37,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NuSearch.Commands", "NuSear
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{7F429523-A61E-46DC-8BCE-96C48C324408}"
 	ProjectSection(SolutionItems) = preProject
-		docker-installation.md = docker-installation.md
+		Documents\build-elk-container.md = Documents\build-elk-container.md
+		Documents\docker-installation.md = Documents\docker-installation.md
+		Documents\error-discussion.md = Documents\error-discussion.md
+		Documents\indexing-documents.md = Documents\indexing-documents.md
+		Documents\prep-elk-container.md = Documents\prep-elk-container.md
+		Documents\search.md = Documents\search.md
+		Documents\secure-elk-container.md = Documents\secure-elk-container.md
+		Documents\testing-kibana.md = Documents\testing-kibana.md
 	EndProjectSection
 EndProject
 Global
